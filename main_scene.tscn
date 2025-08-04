@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdydkir6ryl8f"]
+
+[ext_resource type="PackedScene" uid="uid://dgediknqkugwk" path="res://voxel_renderer.tscn" id="1_0f027"]
+[ext_resource type="Script" uid="uid://bdcmweqq1u2wx" path="res://first_person_controller.gd" id="2_2c62f"]
+[ext_resource type="Script" uid="uid://cikqnjol1l7wj" path="res://fps_counter.gd" id="3_gyfs4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o3jxj"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_0f027"]
+sky_material = SubResource("ProceduralSkyMaterial_o3jxj")
+
+[sub_resource type="Environment" id="Environment_2c62f"]
+background_mode = 2
+sky = SubResource("Sky_0f027")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_2c62f"]
+font_size = 48
+
+[node name="main_scene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2c62f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="voxel_renderer" parent="." instance=ExtResource("1_0f027")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.972565, 0.232631, 0, -0.232631, 0.972565, 0, 1.40399, 3.22159)
+script = ExtResource("2_2c62f")
+
+[node name="fps_counter" type="Label" parent="."]
+offset_left = 16.0
+offset_right = 286.0
+offset_bottom = 88.0
+text = "FPS: 60.0"
+label_settings = SubResource("LabelSettings_2c62f")
+script = ExtResource("3_gyfs4")
