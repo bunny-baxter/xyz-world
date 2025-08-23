@@ -39,17 +39,19 @@ func set_voxel(coord: Vector3i, item: int):
 ## NODE FUNCTIONS
 
 func generate_voxels():
-	for i in range(5):
-		for j in range(5):
+	for i in range(10):
+		for j in range(10):
 			set_voxel(Vector3i(i, 0, j), 1)
 	set_voxel(Vector3i(0, 0, 0), 2)
 	set_voxel(Vector3i(1, 0, 0), 2)
 	set_voxel(Vector3i(0, 1, 0), 2)
 	set_voxel(Vector3i(1, 1, 0), 2)
+	set_voxel(Vector3i(3, 1, 3), 2)
+	set_voxel(Vector3i(3, 4, 3), 2)
 
 func create_cube(offset: Vector3,
 				 verts: PackedVector3Array,
-				 colors: PackedColorArray,
+				 uvs: PackedVector2Array,
 				 normals: PackedVector3Array,
 				 render_posx_face: bool,
 				 render_negx_face: bool,
@@ -58,70 +60,113 @@ func create_cube(offset: Vector3,
 				 render_posz_face: bool,
 				 render_negz_face: bool,
 				 add_collision: bool):
+	#      +Y
+	#       |
+	#       2 -------- 6
+	#      /|         /|
+	#     / |        / |
+	#    4 -------- 7  |
+	#    |  |       |  |
+	#    |  0 ------|- 3 --- +X
+	#    | /        | /
+	#    |/         |/
+	#    1 -------- 5
+	#   /
+	# +Z
 	if render_negx_face:
 		verts.append(Vector3(offset.x, offset.y, offset.z)) # 0
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 4
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x, offset.y, offset.z + CELL_SIZE)) # 1
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x, offset.y, offset.z)) # 0
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z)) # 2
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 4
+		uvs.append(Vector2(1, 0))
 		for _i in range(6):
-			colors.append(Color(0.8, 0.4, 0.4))
 			normals.append(Vector3(-1.0, 0.0, 0.0))
 
 	if render_negy_face:
 		verts.append(Vector3(offset.x, offset.y, offset.z)) # 0
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x, offset.y, offset.z + CELL_SIZE)) # 1
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z + CELL_SIZE)) # 5
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x, offset.y, offset.z)) # 0
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z + CELL_SIZE)) # 5
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z)) # 3
+		uvs.append(Vector2(1, 1))
 		for _i in range(6):
-			colors.append(Color(0.4, 0.8, 0.4))
 			normals.append(Vector3(0.0, -1.0, 0.0))
 
 	if render_negz_face:
 		verts.append(Vector3(offset.x, offset.y, offset.z)) # 0
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z)) # 3
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z)) # 6
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x, offset.y, offset.z)) # 0
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z)) # 6
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z)) # 2
+		uvs.append(Vector2(1, 0))
 		for _i in range(6):
-			colors.append(Color(0.4, 0.4, 0.8))
 			normals.append(Vector3(0.0, 0.0, -1.0))
 
 	if render_posx_face:
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 7
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z)) # 6
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z)) # 3
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 7
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z)) # 3
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z + CELL_SIZE)) # 5
+		uvs.append(Vector2(0, 1))
 		for _i in range(6):
-			colors.append(Color(1.0, 0.2, 0.2))
 			normals.append(Vector3(1.0, 0.0, 0.0))
 
 	if render_posy_face:
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 7
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z)) # 2
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z)) # 6
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 7
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 4
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z)) # 2
+		uvs.append(Vector2(0, 0))
 		for _i in range(6):
-			colors.append(Color(0.2, 1.0, 0.2))
 			normals.append(Vector3(0.0, 1.0, 0.0))
 
 	if render_posz_face:
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 7
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x, offset.y, offset.z + CELL_SIZE)) # 1
+		uvs.append(Vector2(0, 1))
 		verts.append(Vector3(offset.x, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 4
+		uvs.append(Vector2(0, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y + CELL_SIZE, offset.z + CELL_SIZE)) # 7
+		uvs.append(Vector2(1, 0))
 		verts.append(Vector3(offset.x + CELL_SIZE, offset.y, offset.z + CELL_SIZE)) # 5
+		uvs.append(Vector2(1, 1))
 		verts.append(Vector3(offset.x, offset.y, offset.z + CELL_SIZE)) # 1
+		uvs.append(Vector2(0, 1))
 		for _i in range(6):
-			colors.append(Color(0.2, 0.2, 1.0))
 			normals.append(Vector3(0.0, 0.0, 1.0))
 
 	if add_collision:
@@ -139,7 +184,7 @@ func create_geometry():
 	surface_array.resize(Mesh.ARRAY_MAX)
 
 	var verts = PackedVector3Array()
-	var colors = PackedColorArray()
+	var uvs = PackedVector2Array()
 	var normals = PackedVector3Array()
 
 	for index in range(voxels.size()):
@@ -156,10 +201,10 @@ func create_geometry():
 		var render_posz_face = get_voxel(coord + Vector3i(0, 0, 1)) == 0
 		var render_negz_face = get_voxel(coord + Vector3i(0, 0, -1)) == 0
 		var add_collision = render_posx_face or render_negx_face or render_posy_face or render_negy_face or render_posz_face or render_negz_face
-		create_cube(offset, verts, colors, normals, render_posx_face, render_negx_face, render_posy_face, render_negy_face, render_posz_face, render_negz_face, add_collision)
+		create_cube(offset, verts, uvs, normals, render_posx_face, render_negx_face, render_posy_face, render_negy_face, render_posz_face, render_negz_face, add_collision)
 
 	surface_array[Mesh.ARRAY_VERTEX] = verts
-	surface_array[Mesh.ARRAY_COLOR] = colors
+	surface_array[Mesh.ARRAY_TEX_UV] = uvs
 	surface_array[Mesh.ARRAY_NORMAL] = normals
 
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
@@ -171,6 +216,8 @@ func load_shader():
 	shader.code = code
 	var shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
+	var texture: Texture2D = load("res://textures/Texturelabs_Brick_123S.png")
+	shader_material.set_shader_parameter("uv_map", texture)
 	$MeshInstance3D.set_surface_override_material(0, shader_material)
 
 func _ready():
