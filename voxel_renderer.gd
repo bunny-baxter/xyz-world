@@ -1,4 +1,5 @@
 extends Node3D
+class_name VoxelRenderer
 
 const CELL_SIZE: float = 0.5
 
@@ -37,17 +38,6 @@ func set_voxel(coord: Vector3i, item: int):
 	voxels[coord_to_index(coord)] = item
 
 ## NODE FUNCTIONS
-
-func generate_voxels():
-	for i in range(10):
-		for j in range(10):
-			set_voxel(Vector3i(i, 0, j), 1)
-	set_voxel(Vector3i(0, 0, 0), 2)
-	set_voxel(Vector3i(1, 0, 0), 2)
-	set_voxel(Vector3i(0, 1, 0), 2)
-	set_voxel(Vector3i(1, 1, 0), 2)
-	set_voxel(Vector3i(3, 1, 3), 2)
-	set_voxel(Vector3i(3, 4, 3), 2)
 
 func create_cube(offset: Vector3,
 				 verts: PackedVector3Array,
@@ -177,7 +167,8 @@ func create_cube(offset: Vector3,
 		collision_shape.shape = box_shape
 		$StaticBody3D.add_child(collision_shape)
 
-func create_geometry():
+func update_geometry():
+	# TODO: need to clear the mesh first
 	var mesh: ArrayMesh = $MeshInstance3D.mesh
 
 	var surface_array = []
@@ -221,7 +212,4 @@ func load_shader():
 	$MeshInstance3D.set_surface_override_material(0, shader_material)
 
 func _ready():
-	init_voxels(Vector3i(20, 20, 20))
-	generate_voxels()
-	create_geometry()
 	load_shader()

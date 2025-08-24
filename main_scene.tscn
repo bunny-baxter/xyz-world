@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdydkir6ryl8f"]
 
-[ext_resource type="PackedScene" uid="uid://dgediknqkugwk" path="res://voxel_renderer.tscn" id="1_0f027"]
+[ext_resource type="PackedScene" uid="uid://dmva82ordy0st" path="res://voxel_world.tscn" id="1_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://b7qtcln7ocas6" path="res://player.tscn" id="3_d5x1h"]
 [ext_resource type="Script" uid="uid://cikqnjol1l7wj" path="res://fps_counter.gd" id="3_gyfs4"]
 
@@ -22,14 +22,15 @@ font_size = 48
 
 [node name="main_scene" type="Node3D"]
 
+[node name="voxel_world" parent="." instance=ExtResource("1_gyfs4")]
+generation_style = 1
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2c62f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-
-[node name="voxel_renderer" parent="." instance=ExtResource("1_0f027")]
 
 [node name="fps_counter" type="Label" parent="."]
 offset_left = 16.0
@@ -40,4 +41,4 @@ label_settings = SubResource("LabelSettings_2c62f")
 script = ExtResource("3_gyfs4")
 
 [node name="player" parent="." instance=ExtResource("3_d5x1h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
