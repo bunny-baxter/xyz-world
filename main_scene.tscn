@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdydkir6ryl8f"]
 
-[ext_resource type="PackedScene" uid="uid://dmva82ordy0st" path="res://voxel_world.tscn" id="1_gyfs4"]
-[ext_resource type="PackedScene" uid="uid://b7qtcln7ocas6" path="res://player.tscn" id="3_d5x1h"]
-[ext_resource type="Script" uid="uid://cikqnjol1l7wj" path="res://fps_counter.gd" id="3_gyfs4"]
+[ext_resource type="PackedScene" uid="uid://dmva82ordy0st" path="res://voxel/voxel_world.tscn" id="1_gyfs4"]
+[ext_resource type="PackedScene" uid="uid://b7qtcln7ocas6" path="res://entity/player.tscn" id="3_d5x1h"]
+[ext_resource type="Script" uid="uid://cikqnjol1l7wj" path="res://util/fps_counter.gd" id="3_gyfs4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o3jxj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

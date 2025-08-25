@@ -201,7 +201,7 @@ func update_geometry():
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
 
 func load_shader():
-	var shader_file = FileAccess.open("res://voxel_shader.gdshader", FileAccess.READ)
+	var shader_file = FileAccess.open("res://voxel/voxel_shader.gdshader", FileAccess.READ)
 	var code = shader_file.get_as_text()
 	var shader = Shader.new()
 	shader.code = code

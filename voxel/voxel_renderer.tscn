@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgediknqkugwk"]
 
-[ext_resource type="Script" uid="uid://by4qgvetjrerc" path="res://voxel_renderer.gd" id="1_26qg2"]
+[ext_resource type="Script" uid="uid://by4qgvetjrerc" path="res://voxel/voxel_renderer.gd" id="1_26qg2"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_26qg2"]
 

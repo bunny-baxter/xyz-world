@@ -2,7 +2,7 @@ extends Node3D
 
 const CHUNK_SIZE: Vector3i = Vector3i(64, 32, 64)
 
-const VOXEL_RENDERER_SCENE: PackedScene = preload("res://voxel_renderer.tscn")
+const VOXEL_RENDERER_SCENE: PackedScene = preload("res://voxel/voxel_renderer.tscn")
 
 enum GenerationStyle {
 	SUPERFLAT,
