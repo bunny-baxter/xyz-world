@@ -10,4 +10,4 @@ script = ExtResource("1_26qg2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_26qg2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="body_parent" type="Node3D" parent="."]

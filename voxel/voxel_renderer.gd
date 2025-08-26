@@ -160,12 +160,14 @@ func create_cube(offset: Vector3,
 			normals.append(Vector3(0.0, 0.0, 1.0))
 
 	if add_collision:
+		var static_body = StaticBody3D.new()
+		static_body.position = Vector3(offset.x + CELL_SIZE / 2.0, offset.y + CELL_SIZE / 2.0, offset.z + CELL_SIZE / 2.0)
+		$body_parent.add_child(static_body)
 		var collision_shape = CollisionShape3D.new()
-		collision_shape.position = Vector3(offset.x + CELL_SIZE / 2.0, offset.y + CELL_SIZE / 2.0, offset.z + CELL_SIZE / 2.0)
 		var box_shape = BoxShape3D.new()
 		box_shape.size = Vector3(CELL_SIZE, CELL_SIZE, CELL_SIZE)
 		collision_shape.shape = box_shape
-		$StaticBody3D.add_child(collision_shape)
+		static_body.add_child(collision_shape)
 
 func update_geometry():
 	# TODO: need to clear the mesh first

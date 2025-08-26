@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdydkir6ryl8f"]
+[gd_scene load_steps=10 format=3 uid="uid://cdydkir6ryl8f"]
 
 [ext_resource type="PackedScene" uid="uid://dmva82ordy0st" path="res://voxel/voxel_world.tscn" id="1_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://b7qtcln7ocas6" path="res://entity/player.tscn" id="3_d5x1h"]
 [ext_resource type="Script" uid="uid://cikqnjol1l7wj" path="res://util/fps_counter.gd" id="3_gyfs4"]
+[ext_resource type="Texture2D" uid="uid://cwpnuqdxjccuo" path="res://textures/crosshairs.png" id="4_d5x1h"]
+[ext_resource type="Script" uid="uid://g5d6wgj0ymuw" path="res://util/crosshairs.gd" id="5_8mm7a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o3jxj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -42,3 +44,8 @@ script = ExtResource("3_gyfs4")
 
 [node name="player" parent="." instance=ExtResource("3_d5x1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+
+[node name="crosshairs" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("4_d5x1h")
+script = ExtResource("5_8mm7a")
