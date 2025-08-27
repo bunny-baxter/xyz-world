@@ -34,6 +34,9 @@ environment = SubResource("Environment_2c62f")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
+[node name="player" parent="." instance=ExtResource("3_d5x1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+
 [node name="fps_counter" type="Label" parent="."]
 offset_left = 16.0
 offset_right = 286.0
@@ -42,10 +45,9 @@ text = "FPS: 60.0"
 label_settings = SubResource("LabelSettings_2c62f")
 script = ExtResource("3_gyfs4")
 
-[node name="player" parent="." instance=ExtResource("3_d5x1h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-
 [node name="crosshairs" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("4_d5x1h")
 script = ExtResource("5_8mm7a")
+
+[connection signal="destroy_voxel" from="player" to="voxel_world" method="_on_player_destroy_voxel"]

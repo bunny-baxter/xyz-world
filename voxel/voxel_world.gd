@@ -1,6 +1,6 @@
 extends Node3D
 
-const CHUNK_SIZE: Vector3i = Vector3i(64, 32, 64)
+const CHUNK_SIZE: Vector3i = Vector3i(16, 16, 16)
 
 const VOXEL_RENDERER_SCENE: PackedScene = preload("res://voxel/voxel_renderer.tscn")
 
@@ -23,7 +23,7 @@ func generate_noisy_mountains(chunk: VoxelRenderer) -> void:
 	# Initialize to random heights
 	for i in range(CHUNK_SIZE.x):
 		for j in range(CHUNK_SIZE.z):
-			heights.set_at(Vector2i(i, j), randi_range(2, 30))
+			heights.set_at(Vector2i(i, j), randi_range(2, 15))
 	# Smooth heights
 	var get_neighbor = func(array: Array2D, coord: Vector2i):
 		if coord.x < 0 or coord.y < 0 or coord.x >= CHUNK_SIZE.x or coord.y >= CHUNK_SIZE.z:
@@ -56,6 +56,7 @@ func generate_voxels(chunk: VoxelRenderer) -> void:
 
 func _ready() -> void:
 	var chunk: VoxelRenderer = VOXEL_RENDERER_SCENE.instantiate()
+	chunk.name = "chunk"
 	chunk.position = Vector3(
 		-1 * VoxelRenderer.CELL_SIZE * CHUNK_SIZE.x / 2,
 		-1 * VoxelRenderer.CELL_SIZE * CHUNK_SIZE.y,
@@ -64,3 +65,8 @@ func _ready() -> void:
 	generate_voxels(chunk)
 	chunk.update_geometry()
 	add_child(chunk)
+
+func _on_player_destroy_voxel(voxel_coord: Vector3i) -> void:
+	var chunk = $chunk
+	chunk.set_voxel(voxel_coord, 0)
+	chunk.update_geometry()

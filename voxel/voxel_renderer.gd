@@ -170,8 +170,12 @@ func create_cube(offset: Vector3,
 		static_body.add_child(collision_shape)
 
 func update_geometry():
-	# TODO: need to clear the mesh first
 	var mesh: ArrayMesh = $MeshInstance3D.mesh
+	mesh.clear_surfaces()
+	var body_parent = $body_parent
+	for c in body_parent.get_children():
+		body_parent.remove_child(c)
+		c.queue_free()
 
 	var surface_array = []
 	surface_array.resize(Mesh.ARRAY_MAX)

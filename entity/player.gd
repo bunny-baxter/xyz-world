@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal destroy_voxel(voxel_coord: Vector3i)
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var speed: float = 2.5
 @export var jump_speed: float = 3.5
@@ -18,7 +20,9 @@ func _input(event):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			get_viewport().set_input_as_handled()
 		else:
-			$tools/mattock.use_tool()
+			var hit_voxel = $tools/mattock.use_tool()
+			if hit_voxel:
+				destroy_voxel.emit(hit_voxel)
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		$Camera3D.rotate_x(-event.relative.y * mouse_sensitivity)
