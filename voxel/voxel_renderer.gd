@@ -39,6 +39,12 @@ func set_voxel(coord: Vector3i, item: int):
 
 ## NODE FUNCTIONS
 
+var chunk_coord: Vector3i:
+	get:
+		return $body_parent.chunk_coord
+	set(value):
+		$body_parent.chunk_coord = value
+
 func _ready() -> void:
 	$MeshInstance3D.mesh = ArrayMesh.new()
 

@@ -1,4 +1,5 @@
 extends Node3D
+class_name VoxelWorld
 
 const CHUNK_SIZE: Vector3i = Vector3i(16, 16, 16)
 
@@ -41,6 +42,7 @@ func set_voxel(global_voxel: Vector3i, value: int):
 			VoxelRenderer.CELL_SIZE * CHUNK_SIZE.x * chunk_coord.x,
 			VoxelRenderer.CELL_SIZE * CHUNK_SIZE.y * chunk_coord.y,
 			VoxelRenderer.CELL_SIZE * CHUNK_SIZE.z * chunk_coord.z)
+		chunk.chunk_coord = chunk_coord
 		chunk.init_voxels(CHUNK_SIZE)
 		chunks[chunk_coord] = chunk
 		add_child(chunk)
@@ -99,9 +101,6 @@ func _ready() -> void:
 		chunk.update_geometry()
 		chunk.load_shader()
 
-func _on_player_destroy_voxel(voxel_coord: Vector3i) -> void:
-	# TODO: voxel_coord is incorrect now
-	print(str(voxel_coord))
-	#var chunk = $chunk
-	#chunk.set_voxel(voxel_coord, 0)
-	#chunk.update_geometry()
+func _on_player_destroy_voxel(global_voxel: Vector3i) -> void:
+	set_voxel(global_voxel, 0)
+	chunks[voxel_to_chunk(global_voxel)[0]].update_geometry()
