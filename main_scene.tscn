@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdydkir6ryl8f"]
+[gd_scene load_steps=11 format=3 uid="uid://cdydkir6ryl8f"]
 
 [ext_resource type="PackedScene" uid="uid://dmva82ordy0st" path="res://voxel/voxel_world.tscn" id="1_gyfs4"]
+[ext_resource type="Script" uid="uid://c6w3ryaaw23qq" path="res://main_scene.gd" id="1_hq1ik"]
 [ext_resource type="PackedScene" uid="uid://b7qtcln7ocas6" path="res://entity/player.tscn" id="3_d5x1h"]
 [ext_resource type="Script" uid="uid://cikqnjol1l7wj" path="res://util/fps_counter.gd" id="3_gyfs4"]
 [ext_resource type="Texture2D" uid="uid://cwpnuqdxjccuo" path="res://textures/crosshairs.png" id="4_d5x1h"]
@@ -23,6 +24,7 @@ glow_enabled = true
 font_size = 48
 
 [node name="main_scene" type="Node3D"]
+script = ExtResource("1_hq1ik")
 
 [node name="voxel_world" parent="." instance=ExtResource("1_gyfs4")]
 generation_style = 1
@@ -35,7 +37,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="player" parent="." instance=ExtResource("3_d5x1h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="fps_counter" type="Label" parent="."]
 offset_left = 16.0

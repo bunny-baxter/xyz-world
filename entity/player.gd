@@ -21,7 +21,7 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 		else:
 			var hit_voxel = $tools/mattock.use_tool()
-			if hit_voxel:
+			if hit_voxel != null:
 				destroy_voxel.emit(hit_voxel)
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)

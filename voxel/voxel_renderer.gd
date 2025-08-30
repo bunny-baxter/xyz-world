@@ -39,6 +39,9 @@ func set_voxel(coord: Vector3i, item: int):
 
 ## NODE FUNCTIONS
 
+func _ready() -> void:
+	$MeshInstance3D.mesh = ArrayMesh.new()
+
 func create_cube(offset: Vector3,
 				 verts: PackedVector3Array,
 				 uvs: PackedVector2Array,
@@ -216,6 +219,3 @@ func load_shader():
 	var texture: Texture2D = load("res://textures/Texturelabs_Brick_123S.png")
 	shader_material.set_shader_parameter("uv_map", texture)
 	$MeshInstance3D.set_surface_override_material(0, shader_material)
-
-func _ready():
-	load_shader()

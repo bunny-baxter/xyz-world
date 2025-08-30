@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgediknqkugwk"]
+[gd_scene load_steps=2 format=3 uid="uid://dgediknqkugwk"]
 
 [ext_resource type="Script" uid="uid://by4qgvetjrerc" path="res://voxel/voxel_renderer.gd" id="1_26qg2"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_26qg2"]
 
 [node name="voxel_renderer" type="Node3D"]
 script = ExtResource("1_26qg2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_26qg2")
 
 [node name="body_parent" type="Node3D" parent="."]
