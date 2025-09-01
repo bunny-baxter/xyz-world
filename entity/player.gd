@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 signal destroy_voxel(voxel_coord: Vector3i)
 

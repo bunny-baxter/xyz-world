@@ -52,4 +52,12 @@ position = Vector2(960, 540)
 texture = ExtResource("4_d5x1h")
 script = ExtResource("5_8mm7a")
 
+[node name="tools_hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 184.0
+offset_right = 496.0
+offset_bottom = 664.0
+
 [connection signal="destroy_voxel" from="player" to="voxel_world" method="_on_player_destroy_voxel"]

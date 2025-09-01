@@ -1,5 +1,7 @@
 extends Node
 
+var tool_name: String = "Mattock"
+var tool_description: String = "Destroy a block"
 
 func use_tool():
 	var collider: CollisionObject3D = $RayCast3D.get_collider()
