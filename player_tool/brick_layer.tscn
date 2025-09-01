@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyijr0gv20s3n"]
+
+[ext_resource type="Script" uid="uid://wokn1ba5tler" path="res://player_tool/brick_layer.gd" id="1_1uhuc"]
+
+[node name="brick_layer" type="Node3D"]
+script = ExtResource("1_1uhuc")

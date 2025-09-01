@@ -9,7 +9,7 @@ const INACTIVE_COLOR: Color = Color(1.0, 1.0, 1.0)
 @export var active: bool = false:
 	set(value):
 		active = value
-		name_label.label_settings.font_color = ACTIVE_COLOR if active else INACTIVE_COLOR
+		name_label.modulate = ACTIVE_COLOR if active else INACTIVE_COLOR
 		description_label.visible = active
 
 func set_tool_name(value):

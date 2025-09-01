@@ -6,7 +6,6 @@
 [sub_resource type="LabelSettings" id="LabelSettings_v6xye"]
 font = ExtResource("1_ewoi1")
 font_size = 48
-font_color = Color(1, 1, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m64px"]
 font = ExtResource("1_ewoi1")

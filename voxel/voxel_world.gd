@@ -48,6 +48,9 @@ func set_voxel(global_voxel: Vector3i, value: int):
 		add_child(chunk)
 	return chunks[chunk_coord].set_voxel(local_voxel, value)
 
+func update_geometry_for_voxel(global_voxel: Vector3i):
+	chunks[voxel_to_chunk(global_voxel)[0]].update_geometry()
+
 func generate_superflat() -> void:
 	for i in range(-32, 32):
 		for j in range(-16, 16):
@@ -100,7 +103,3 @@ func _ready() -> void:
 		var chunk: VoxelRenderer = chunks[coord]
 		chunk.update_geometry()
 		chunk.load_shader()
-
-func _on_player_destroy_voxel(global_voxel: Vector3i) -> void:
-	set_voxel(global_voxel, 0)
-	chunks[voxel_to_chunk(global_voxel)[0]].update_geometry()

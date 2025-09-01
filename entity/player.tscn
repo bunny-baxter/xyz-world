@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7qtcln7ocas6"]
+[gd_scene load_steps=6 format=3 uid="uid://b7qtcln7ocas6"]
 
 [ext_resource type="Script" uid="uid://br35x3ep0vhuu" path="res://entity/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://b86cjhtc6q678" path="res://player_tool/mattock.tscn" id="2_xlvtu"]
+[ext_resource type="PackedScene" uid="uid://cyijr0gv20s3n" path="res://player_tool/brick_layer.tscn" id="3_qd8qs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sh265"]
 height = 0.95
@@ -28,3 +29,9 @@ mesh = SubResource("CylinderMesh_4flbx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="mattock" parent="tools" instance=ExtResource("2_xlvtu")]
+
+[node name="brick_layer" parent="tools" instance=ExtResource("3_qd8qs")]
+
+[node name="tool_raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+target_position = Vector3(0, 0, -2)

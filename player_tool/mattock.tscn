@@ -4,6 +4,3 @@
 
 [node name="mattock" type="Node3D"]
 script = ExtResource("1_ur68s")
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -2)
