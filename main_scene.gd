@@ -3,7 +3,7 @@ extends Node3D
 const TOOL_HUD_SCENE: PackedScene = preload("res://control/tool_hud.tscn")
 
 @onready var voxel_world: VoxelWorld = $voxel_world
-@onready var player: Player = $player
+@onready var player: Player = $voxel_world/player
 @onready var tools_hud = $tools_hud
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _ready() -> void:
 		player_spawn_y * VoxelRenderer.CELL_SIZE + 0.475,
 		VoxelRenderer.CELL_SIZE / 2)
 	var tool_y: int = 0
-	for tool in $player/tools.get_children():
+	for tool in player.get_node("tools").get_children():
 		var tool_hud = TOOL_HUD_SCENE.instantiate()
 		tools_hud.add_child(tool_hud)
 		tool_hud.position.y = tool_y

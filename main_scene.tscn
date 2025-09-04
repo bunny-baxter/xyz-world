@@ -29,15 +29,15 @@ script = ExtResource("1_hq1ik")
 [node name="voxel_world" parent="." instance=ExtResource("1_gyfs4")]
 generation_style = 1
 
+[node name="player" parent="voxel_world" instance=ExtResource("3_d5x1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2c62f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-
-[node name="player" parent="." instance=ExtResource("3_d5x1h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="fps_counter" type="Label" parent="."]
 offset_left = 16.0
@@ -60,4 +60,4 @@ offset_top = 184.0
 offset_right = 496.0
 offset_bottom = 664.0
 
-[connection signal="active_tool_updated" from="player" to="." method="_on_player_active_tool_updated"]
+[connection signal="active_tool_updated" from="voxel_world/player" to="." method="_on_player_active_tool_updated"]

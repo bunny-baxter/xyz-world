@@ -15,6 +15,11 @@ var active_tool_index: int = 0
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+func maybe_switch_active_tool(index: int):
+	if tools.get_children().size() > index and active_tool_index != index:
+		active_tool_index = index
+		active_tool_updated.emit()
+
 func _input(event):
 	if event.is_action_pressed("release_mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -24,14 +29,12 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 		else:
 			use_tool()
-	if event.is_action_pressed("switch_to_tool_1") and tools.get_children().size() >= 1:
-		if active_tool_index != 0:
-			active_tool_index = 0
-			active_tool_updated.emit()
-	if event.is_action_pressed("switch_to_tool_2") and tools.get_children().size() >= 2:
-		if active_tool_index != 1:
-			active_tool_index = 1
-			active_tool_updated.emit()
+	if event.is_action_pressed("switch_to_tool_1"):
+		maybe_switch_active_tool(0)
+	if event.is_action_pressed("switch_to_tool_2"):
+		maybe_switch_active_tool(1)
+	if event.is_action_pressed("switch_to_tool_3"):
+		maybe_switch_active_tool(2)
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		$Camera3D.rotate_x(-event.relative.y * mouse_sensitivity)
@@ -68,4 +71,4 @@ func tool_raycast():
 func use_tool():
 	var hit_voxel = tool_raycast()
 	if hit_voxel != null:
-		tools.get_children()[active_tool_index].apply_tool($"../voxel_world", hit_voxel, $tool_raycast.get_collision_normal())
+		tools.get_children()[active_tool_index].apply_tool(get_parent(), hit_voxel, $tool_raycast.get_collision_normal())
